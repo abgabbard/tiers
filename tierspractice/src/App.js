@@ -19,7 +19,7 @@ const [characters, setCharacters] = useState([]);
   console.log("characters:", characters)
   return (
     <div>
-
+        { characters.map(c => <div>{c.name}</div>)}
     </ div>
   );
 }
