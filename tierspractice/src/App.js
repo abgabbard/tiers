@@ -6,10 +6,17 @@ function App() {
 
 const [characters, setCharacters] = useState([]); 
   useEffect(() => {
-    API.search().then(result => {
-      console.log(result.data.data.results)
+    API.search().then(myResults => {
+     setCharacters(myResults.data.data.results.map( character => {
+       return {
+        id: character.id, 
+        name: character.name,
+        image: character.thumbnail.path + '.' + character.thumbnail.extension
+       }
+     }))
     })
   }, [])
+  console.log("characters:", characters)
   return (
     <div>
 
