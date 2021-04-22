@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Character from './components/Character';
 import API from './utils/API';
 
 function App() {
@@ -19,7 +20,7 @@ const [characters, setCharacters] = useState([]);
   console.log("characters:", characters)
   return (
     <div>
-        { characters.map(c => <div>{c.name}</div>)}
+        { characters.map(c => <Character name={c.name} id={c.id} image={c.image}/>)}
     </ div>
   );
 }
