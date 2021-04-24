@@ -8,13 +8,16 @@ function App() {
 const [characters, setCharacters] = useState([]); 
   useEffect(() => {
     API.search().then(myResults => {
-     setCharacters(myResults.data.data.results.map( character => {
+     setCharacters(myResults.data.data.results
+      .map( character => {
        return {
         id: character.id, 
         name: character.name,
         image: character.thumbnail.path + '.' + character.thumbnail.extension
        }
-     }))
+     })
+     .sort((a,b) => b.name.localeCompare(a.name))
+     )
     })
   }, [])
   console.log("characters:", characters)
