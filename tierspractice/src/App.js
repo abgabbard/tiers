@@ -14,7 +14,7 @@ function App() {
         myResults.data.data.results
           .map((character) => {
             return {
-              id: character.id,
+              id: character.id.toString(),
               name: character.name,
               image:
                 character.thumbnail.path + "." + character.thumbnail.extension,
@@ -31,6 +31,8 @@ function App() {
   return (
     <div>
       <button onClick={handlesort}>Toggle Sort</button>
+      <button onClick={() => setSortName('name')}>Sort by Name</button>
+      <button onClick={() => setSortName('id')}>Sort by ID</button>
       {characters
         .sort((a, b) => {
           if (sortAscending) {
