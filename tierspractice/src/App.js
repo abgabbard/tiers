@@ -5,7 +5,9 @@ import API from './utils/API';
 
 function App() {
 
-const [characters, setCharacters] = useState([]); 
+const [characters, setCharacters] = useState([]);
+const [sortAscending, setSortAscending] = useState(true) 
+
   useEffect(() => {
     API.search().then(myResults => {
      setCharacters(myResults.data.data.results
@@ -20,10 +22,25 @@ const [characters, setCharacters] = useState([]);
      )
     })
   }, [])
+  const handlesort = () => {
+setSortAscending(!sortAscending)
+  }
   console.log("characters:", characters)
   return (
     <div>
-        { characters.map(c => <Character name={c.name} id={c.id} image={c.image}/>)}
+       <button onClick={handlesort}>Toggle Sort</button>
+        { characters
+        .sort((a,b) => {
+          if (sortAscending) {
+            return a.name.localeCompare(b.name) 
+          }
+            else {
+              return b.name.localeCompare(a.name)
+            }
+          }
+        )
+        .map(c => <Character name={c.name} id={c.id} image={c.image}/>)}
+       
     </ div>
   );
 }
